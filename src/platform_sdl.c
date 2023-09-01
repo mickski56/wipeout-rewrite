@@ -126,7 +126,8 @@ void platform_pump_events() {
 				if (
 					code == INPUT_GAMEPAD_L_TRIGGER || 
 					code == INPUT_GAMEPAD_R_TRIGGER
-				) {
+				) 
+				{
 					input_set_button_state(code, state);
 				}
 				else if (state > 0) {
