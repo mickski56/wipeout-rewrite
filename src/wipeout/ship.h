@@ -23,6 +23,7 @@
 #define SHIP_ELECTROED			(1<<15)
 #define SHIP_REVCONNED			(1<<16)
 #define SHIP_SPECIALED			(1<<17)
+#define SHIP_HIT			(1<<18)
 
 
 // Timings
@@ -109,6 +110,7 @@ typedef struct ship_t {
 
 	float ebolt_timer;
 	float ebolt_effect_timer;
+	float hit_timer;
 	float revcon_timer;
 	float special_timer;
 

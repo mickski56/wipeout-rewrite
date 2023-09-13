@@ -127,6 +127,12 @@ void ship_ai_update_race(ship_t *self) {
 	if (self->ebolt_timer <= 0) {
 		flags_rm(self->flags, SHIP_ELECTROED);
 	}
+	if (self->hit_timer > 0) {
+		self->hit_timer -= system_tick();
+	}
+	if (self->hit_timer <= 0) {
+		flags_rm(self->flags, SHIP_HIT);
+	}
 
 	int behind_speed = def.circuts[g.circut].settings[g.race_class].behind_speed;
 
@@ -530,6 +536,28 @@ void ship_ai_update_race(ship_t *self) {
 		if (rand_int(0, 50) == 0) {
 			self->speed -= self->speed * 0.5 * 30 * system_tick();
 		}
+	}
+	if (flags_is(self->flags, SHIP_HIT)) {
+		self->speed = self->speed * 0.75;
+		//printf("velocity.x %f\n", self->angular_velocity.x);
+		printf("speed      %f\n", self->speed);
+		printf("velocity.y %f\n", self->angular_velocity.y);
+		printf("acceleration.y %f\n", self->angular_acceleration.y);
+		printf("velocity.z %f\n", self->angular_velocity.z);
+		printf("acceleration.z %f\n", self->angular_acceleration.z);
+		printf("position.z %f\n", self->position.z);
+		//self->angular_velocity.x += (-((rand() & 1) << 1) + 1) * 16.23;
+		//self->angular_velocity.y += (-((rand() & 1) << 1) + 1) * 19.23;
+		if (self->angular_velocity.y >= 0) {
+			self->angular_acceleration.y += rand_float(self->turn_rate/16 ,self->turn_rate/4);
+		}
+		else {
+			self->angular_acceleration.y -= rand_float(self->turn_rate/16 ,self->turn_rate/4);
+		}
+		self->angular_acceleration.z += 0.25;
+		self->position.z += 200;
+		printf("position.z %f\n", self->position.z);
+		//self->turn_rate_from_hit = rand_float(-M_PI, M_PI);
 	}
 
 	sfx_set_position(self->sfx_engine_thrust, self->position, self->velocity, 0.5);

@@ -437,9 +437,8 @@ void weapon_update_missile(weapon_t *self) {
 				// SetShake(20);  // FIXME
 			}
 			else {
-				ship->speed = ship->speed * 0.03125;
-				ship->angular_velocity.z += 10 * M_PI;
-				ship->turn_rate_from_hit = rand_float(-M_PI, M_PI);
+				flags_add(ship->flags, SHIP_HIT);
+				ship->hit_timer = WEAPON_HIT_DURATION;
 			}
 		}
 	}
@@ -485,9 +484,8 @@ void weapon_update_rocket(weapon_t *self) {
 				// SetShake(20);  // FIXME
 			}
 			else {
-				ship->speed = ship->speed * 0.03125;
-				ship->angular_velocity.z += 10 * M_PI;
-				ship->turn_rate_from_hit = rand_float(-M_PI, M_PI);
+				flags_add(ship->flags, SHIP_HIT);
+				ship->hit_timer = WEAPON_HIT_DURATION;
 			}
 		}
 	}
