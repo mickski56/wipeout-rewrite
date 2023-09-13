@@ -201,7 +201,6 @@ void ship_init(ship_t *self, section_t *section, int pilot, int inv_start_rank) 
 	self->turn_rate = 0;
 	self->thrust_mag = 0;
 	self->current_thrust_max = 0;
-	self->turn_rate_from_hit = 0;
 	self->brake_right = 0;
 	self->brake_left = 0;
 	self->flags = SHIP_RACING | SHIP_VISIBLE | SHIP_DIRECTION_FORWARD;
