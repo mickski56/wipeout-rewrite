@@ -84,7 +84,6 @@ typedef struct ship_t {
 	
 	float turn_rate;
 	float turn_rate_max;
-	float turn_rate_from_hit;
 
 	float mass;
 	float thrust_mag;

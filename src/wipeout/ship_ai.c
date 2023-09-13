@@ -481,7 +481,7 @@ void ship_ai_update_race(ship_t *self) {
 		float xy_dist = sqrt(track_target.x * track_target.x + track_target.z * track_target.z);
 
 		self->angular_velocity.x = wrap_angle(-atan2(track_target.y, xy_dist) - self->angle.x) * (1.0/16.0) * 30;
-		self->angular_velocity.y = (wrap_angle(-atan2(track_target.x, track_target.z) - self->angle.y) * (1.0/16.0)) * 30 + self->turn_rate_from_hit;
+		self->angular_velocity.y = (wrap_angle(-atan2(track_target.x, track_target.z) - self->angle.y) * (1.0/16.0)) * 30;
 	}
 
 
