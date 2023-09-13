@@ -177,43 +177,24 @@ void ship_player_update_race(ship_t *self) {
 	}
 
 	self->angular_acceleration = vec3(0, 0, 0);
-	float turn_rate_target = 0;
 
 	if (input_state(A_LEFT)) {
-		turn_rate_target = (pow(input_state(A_LEFT),1.2) * self->turn_rate_max);
 		if (self->angular_velocity.y >= 0) {
-			if (turn_rate_target > self->angular_velocity.y) {	
-				self->angular_acceleration.y += turn_rate_target * self->turn_rate;
-				printf("1L\n");
-			}
-			else if(turn_rate_target < self->angular_velocity.y) {
-				self->angular_acceleration.y -= turn_rate_target * self->turn_rate;
-				printf("3L\n");
-			}
+			self->angular_acceleration.y += input_state(A_LEFT) * self->turn_rate;
 		}
 		else if (self->angular_velocity.y < 0) {
-			self->angular_acceleration.y += turn_rate_target * self->turn_rate * 2;
-			printf("2L\n");
+			self->angular_acceleration.y += input_state(A_LEFT) * self->turn_rate * 2;
 		}
 	}
 	else if (input_state(A_RIGHT)) {
-		turn_rate_target = (pow(input_state(A_RIGHT),1.2) * self->turn_rate_max);
 		if (self->angular_velocity.y <= 0) {
-			if (-turn_rate_target < self->angular_velocity.y) {	
-				self->angular_acceleration.y -= turn_rate_target * self->turn_rate;
-				printf("1R\n");
-			}
-			else if(-turn_rate_target > self->angular_velocity.y) {
-				self->angular_acceleration.y += turn_rate_target * self->turn_rate;
-				printf("3R\n");
-			}
+			self->angular_acceleration.y -= input_state(A_RIGHT) * self->turn_rate;
 		}
 		else if (self->angular_velocity.y > 0) {
-			self->angular_acceleration.y -= turn_rate_target * self->turn_rate * 2;
-			printf("2R\n");
+			self->angular_acceleration.y -= input_state(A_RIGHT) * self->turn_rate * 2;
 		}
 	}
-
+	
 	if (flags_is(self->flags, SHIP_ELECTROED)) {
 		self->ebolt_effect_timer += system_tick();
 		// Yank the ship every 0.1 seconds
